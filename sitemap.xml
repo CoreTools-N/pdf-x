@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://sitemaps.org">
   <url>
-    <loc>https://github.io</loc>
+    <loc>https://coretools-n.github.io/pdf-x./</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://github.iocompress.html</loc>
+    <loc>https://coretools-n.github.io/pdf-x./compress.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://github.ioimgtopdf.html</loc>
+    <loc>https://coretools-n.github.io/pdf-x./imgtopdf.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://github.iomerge.html</loc>
+    <loc>https://coretools-n.github.io/pdf-x./merge.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://github.iosplit.html</loc>
+    <loc>https://coretools-n.github.io/pdf-x./split.html</loc>
     <priority>0.8</priority>
   </url>
 </urlset>
