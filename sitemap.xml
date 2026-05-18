@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://sitemaps.org">
+  <url>
+    <loc>https://github.io</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://github.iocompress.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://github.ioimgtopdf.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://github.iomerge.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://github.iosplit.html</loc>
+    <priority>0.8</priority>
+  </url>
+</urlset>
