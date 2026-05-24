@@ -1,23 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage -->
   <url>
     <loc>https://coretools-n.github.io/pdf-x/</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Sitemap itself -->
   <url>
-    <loc>https://coretools-n.github.io/pdf-x/compress.html</loc>
+    <loc>https://coretools-n.github.io/pdf-x/sitemap.xml</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Example subpages (replace/add with your actual pages) -->
+  <url>
+    <loc>https://coretools-n.github.io/pdf-x/about.html</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://coretools-n.github.io/pdf-x/imgtopdf.html</loc>
-    <priority>0.8</priority>
+    <loc>https://coretools-n.github.io/pdf-x/contact.html</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
+
   <url>
-    <loc>https://coretools-n.github.io/pdf-x/merge.html</loc>
-    <priority>0.8</priority>
+    <loc>https://coretools-n.github.io/pdf-x/docs/tutorial.pdf</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://coretools-n.github.io/pdf-x/split.html</loc>
-    <priority>0.8</priority>
-  </url>
+
 </urlset>
