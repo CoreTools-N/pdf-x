@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://coretools-n.github.io/pdf-x/sitemap.xml
