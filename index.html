@@ -513,7 +513,7 @@ z
     <!-- MODERN LOADING OVERLAY CONTAINER -->
     <div class="loading-overlay" id="global-loader">
         <div class="loader-spinner"></div>
-        <div class="loading-text">Readying your workspace...</div>
+        <div class="loading-text">Ready your workspace..</div>
     </div>
 
     <div class="header">
@@ -668,7 +668,7 @@ z
 
     <script>
         // --- RESTORED ORIGINAL SIMULATED COUNTER ---
-        function updateCounter() {
+     function updateCounter() {
             const countEl = document.getElementById('view-count');
             let count = parseInt(countEl.innerText.replace(/,/g, ''));
             count += Math.floor(Math.random() * 5);
@@ -688,7 +688,7 @@ z
         }
         setTimeout(runAdShowSequence, 2000);
 
-        // FAST 1-SECOND NAVIGATION LOADER ROUTINE
+        // FAST 1-SECOND NAVIGATION LOADER ROUTINE WITH BACK BUTTON RESCUE
         var routingElements = document.querySelectorAll('.load-route');
         var loaderOverlay = document.getElementById('global-loader');
 
@@ -703,6 +703,16 @@ z
                     window.location.href = targetDestination;
                 }, 1000); 
             });
+        });
+
+        // ✅ THE INTEGRATED BACK-BUTTON FIX
+        window.addEventListener('pageshow', function(event) {
+            // Disables and removes the loader if the browser serves page from Back/Forward caching memory
+            if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+                if (loaderOverlay) {
+                    loaderOverlay.classList.remove('active');
+                }
+            }
         });
     </script>
 
