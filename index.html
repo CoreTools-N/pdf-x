@@ -369,7 +369,6 @@ z
 
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -440,10 +439,54 @@ z
             flex-shrink: 0; 
         }
 
+        /* DYNAMIC BOTTOM BANNER ANIMATION WRAPPER */
+        .sticky-bottom-ad {
+            position: fixed;
+            bottom: -110px; 
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            width: 100%;
+            max-width: 728px;
+            background: rgba(243, 240, 236, 0.95);
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.15);
+            text-align: center;
+            padding: 5px 0;
+            transition: bottom 0.5s ease-in-out;
+        }
+        .sticky-bottom-ad.slide-up {
+            bottom: 0px; 
+        }
+
+        /* MATCHING THEME MODERN LOADER OVERLAY */
+        .loading-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(44, 44, 52, 0.95); 
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 10000; opacity: 0; pointer-events: none;
+            transition: opacity 0.2s ease-in-out;
+        }
+        .loading-overlay.active { opacity: 1; pointer-events: auto; }
+        .loader-spinner {
+            width: 50px; height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--red); 
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        .loading-text { color: white; font-weight: 600; margin-top: 15px; font-size: 1.1rem; letter-spacing: 0.5px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
         /* Responsive styling for mobile adjustments */
         @media (max-width: 950px) {
             .main-content-wrapper { flex-direction: column; align-items: center; }
             .ad-sidebar-right { margin: 20px auto; }
+        }
+
+        /* REMOVES THE FIRST HERO SIDEBAR AD ENTIRELY ON PHONE VIEWS */
+        @media (max-width: 768px) {
+            .hero .ad-sidebar-right { display: none !important; }
         }
 
         /* Feature List Styling */
@@ -467,12 +510,18 @@ z
 </head>
 <body>
 
+    <!-- MODERN LOADING OVERLAY CONTAINER -->
+    <div class="loading-overlay" id="global-loader">
+        <div class="loader-spinner"></div>
+        <div class="loading-text">Readying your workspace...</div>
+    </div>
+
     <div class="header">
         <a href="#" class="logo">PDF<span>-X</span></a>
     </div>
 
    <!-- HERO SECTION WITH CENTERED TEXT AND FLOATING RIGHT AD -->
- <div class="hero" style="position: relative; text-align: center; padding: 40px 0; width: 100%; max-width: 100%; margin: 0; box-sizing: border-box;">
+  <div class="hero" style="position: relative; text-align: center; padding: 40px 0; width: 100%; max-width: 100%; margin: 0; box-sizing: border-box;">
 
         <h1 style="font-size: 2.5rem; margin-bottom: 10px;">All PDF tools in one place</h1>
         <p style="color: #666; margin: 0;">Select a tool below to begin your professional document workflow.</p>
@@ -480,10 +529,10 @@ z
         <div class="ad-sidebar-right" style="position: absolute; right: 20px; top: 0; width: 160px; height: 600px; z-index: 10;">
             <script>
                 atOptions = {
-                    'key' : '7cae2fd60ddf40a4471b1423bd525121', // Replace this key if you have a specific vertical ad key
+                    'key' : '7cae2fd60ddf40a4471b1423bd525121',
                     'format' : 'iframe',
-                    'height' : 600, // Changed to 600px tall
-                    'width' : 160,  // Changed to 160px wide
+                    'height' : 300,
+                    'width' : 160,
                     'params' : {}
                 };
             </script>
@@ -492,6 +541,7 @@ z
 
     </div>
 
+    <!-- RESTORED ORIGINAL TOTAL SITE VIEWS PILL TEXT -->
     <div class="realtime-stats">
         <div class="counter-pill">
             <div class="live-dot"></div> Total Site Views: <span id="view-count">1,402,280</span>
@@ -499,24 +549,26 @@ z
     </div>
 
   
+    <!-- SECOND AD SLOT: AUTOMATIC SIZE AND KEY SWITCHING -->
     <div class="ad-banner-center">
             <script type="text/javascript">
+                var isMobile = window.innerWidth <= 768;
+                
                 atOptions = {
-                    'key' : '926f67bddb483350a3e9f47849dc7d0e',
+                    'key' : isMobile ? '2276729ed87fe959203dc3ea4e044ac7' : '926f67bddb483350a3e9f47849dc7d0e',
                     'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
+                    'height' : isMobile ? 50 : 90,
+                    'width' : isMobile ? 320 : 728,
                     'params' : {}
                 };
             </script>
             <script type="text/javascript" src="https://www.highperformanceformat.com/926f67bddb483350a3e9f47849dc7d0e/invoke.js"></script>
-        </div>
     </div>
 
     <div class="main-content-wrapper">
         
         <div class="tool-grid">
-            <a href="merge.html" class="card">
+            <a href="merge.html" class="card load-route">
                 <span class="icon">📑</span>
                 <h3>Merge PDF</h3>
                 <ul class="feature-list">
@@ -526,7 +578,7 @@ z
                 </ul>
             </a>
 
-            <a href="split.html" class="card">
+            <a href="split.html" class="card load-route">
                 <span class="icon">✂️</span>
                 <h3>Split PDF</h3>
                 <ul class="feature-list">
@@ -536,7 +588,7 @@ z
                 </ul>
             </a>
 
-            <a href="compress.html" class="card">
+            <a href="compress.html" class="card load-route">
                 <span class="icon">📉</span>
                 <h3>Compress PDF</h3>
                 <ul class="feature-list">
@@ -546,7 +598,7 @@ z
                 </ul>
             </a>
             
-            <a href="imgtopdf.html" class="card">
+            <a href="imgtopdf.html" class="card load-route">
                 <span class="icon">🎞️</span>
                 <h3>PDF & Images</h3>
                 <ul class="feature-list">
@@ -558,13 +610,17 @@ z
         </div>
 
     </div>
+
+    <!-- THIRD AD SLOT: AUTOMATIC SIZE AND KEY SWITCHING -->
     <div class="ad-banner-center">
         <script type="text/javascript">
+            var isMobile = window.innerWidth <= 768;
+            
             atOptions = {
-                'key' : '926f67bddb483350a3e9f47849dc7d0e',
+                'key' : isMobile ? '2276729ed87fe959203dc3ea4e044ac7' : '926f67bddb483350a3e9f47849dc7d0e',
                 'format' : 'iframe',
-                'height' : 90,
-                'width' : 728,
+                'height' : isMobile ? 50 : 90,
+                'width' : isMobile ? 320 : 728,
                 'params' : {}
             };
         </script>
@@ -594,8 +650,24 @@ z
         &copy; 2026 UtiliPDF Suite. Built for Privacy & Speed.
     </div>
 
+    <!-- TIMED SLIDE AD CONTAINER BANNER FRAME (WITH AUTOMATIC KEY AND SIZE SWITCHING) -->
+    <div class="sticky-bottom-ad" id="timed-bottom-banner">
+        <script type="text/javascript">
+            var isMobile = window.innerWidth <= 768;
+            
+            atOptions = {
+                'key' : isMobile ? '2276729ed87fe959203dc3ea4e044ac7' : '926f67bddb483350a3e9f47849dc7d0e',
+                'format' : 'iframe',
+                'height' : isMobile ? 50 : 90,
+                'width' : isMobile ? 320 : 728,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="https://www.highperformanceformat.com/926f67bddb483350a3e9f47849dc7d0e/invoke.js"></script>
+    </div>
+
     <script>
-        // Real-time counter simulation
+        // --- RESTORED ORIGINAL SIMULATED COUNTER ---
         function updateCounter() {
             const countEl = document.getElementById('view-count');
             let count = parseInt(countEl.innerText.replace(/,/g, ''));
@@ -603,20 +675,36 @@ z
             countEl.innerText = count.toLocaleString();
         }
         setInterval(updateCounter, 3000);
-    </script>
 
-    <script type="text/javascript">
-        atOptions = {
-            'key' : '926f67bddb483350a3e9f47849dc7d0e',
-            'format' : 'iframe',
-            'height' : 90,
-            'width' : 728,
-            'params' : {}
-        };
+        // STICKY BOTTOM AD SLIDE ROUTINE (15s SHOW / 10s HIDE)
+        var bottomAdContainer = document.getElementById('timed-bottom-banner');
+        
+        function runAdShowSequence() {
+            bottomAdContainer.classList.add('slide-up');
+            setTimeout(function() {
+                bottomAdContainer.classList.remove('slide-up');
+                setTimeout(runAdShowSequence, 10000);
+            }, 15000);
+        }
+        setTimeout(runAdShowSequence, 2000);
+
+        // FAST 1-SECOND NAVIGATION LOADER ROUTINE
+        var routingElements = document.querySelectorAll('.load-route');
+        var loaderOverlay = document.getElementById('global-loader');
+
+        routingElements.forEach(function(element) {
+            element.addEventListener('click', function(event) {
+                event.preventDefault(); 
+                var targetDestination = this.getAttribute('href');
+                
+                loaderOverlay.classList.add('active');
+                
+                setTimeout(function() {
+                    window.location.href = targetDestination;
+                }, 1000); 
+            });
+        });
     </script>
-    <script type="text/javascript" src="https://www.highperformanceformat.com/926f67bddb483350a3e9f47849dc7d0e/invoke.js"></script>
 
 </body>
 </html>
-
-```
