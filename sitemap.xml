@@ -2,20 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://coretools-n.github.io/pdf-x/</loc>
-  </url>
-  <url>
-    <loc>https://coretools-n.github.io/pdf-x/index.html</loc>
+    <lastmod>2026-09-07</lastmod>
   </url>
   <url>
     <loc>https://coretools-n.github.io/pdf-x/compress.html</loc>
+    <lastmod>2026-09-07</lastmod>
   </url>
   <url>
     <loc>https://coretools-n.github.io/pdf-x/merge.html</loc>
+    <lastmod>2026-09-07</lastmod>
   </url>
   <url>
     <loc>https://coretools-n.github.io/pdf-x/split.html</loc>
+    <lastmod>2026-09-07</lastmod>
   </url>
   <url>
     <loc>https://coretools-n.github.io/pdf-x/imgtopdf.html</loc>
+    <lastmod>2026-09-07</lastmod>
   </url>
 </urlset>
