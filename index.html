@@ -52,6 +52,120 @@
         .logo { color: var(--red); font-size: 1.8rem; font-weight: 800; text-decoration: none; }
         .logo span { color: var(--dark); }
 
+        /* Top Right Feedback Button Style */
+        .feedback-btn {
+            background-color: var(--dark); /* <-- Change this line */
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+            font-size: 0.95rem;
+        }
+        .feedback-btn:hover {
+            background-color: #c52723;
+            transform: translateY(-2px);
+        }
+
+        /* Feedback Modal Styles */
+        .feedback-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(44, 44, 52, 0.8);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 20000;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .feedback-modal-overlay.active {
+            opacity: 1; pointer-events: auto;
+        }
+        .feedback-modal {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        .feedback-modal-overlay.active .feedback-modal {
+            transform: translateY(0);
+        }
+        .feedback-modal h3 {
+            margin-top: 0;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        .feedback-form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .feedback-form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .feedback-form-group input,
+        .feedback-form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+        }
+        .feedback-form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .feedback-form-group input:focus,
+        .feedback-form-group textarea:focus {
+            outline: none;
+            border-color: var(--red);
+        }
+        .modal-submit-btn {
+            background: var(--red);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .modal-submit-btn:hover {
+            background: #c526235b;
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #888;
+            cursor: pointer;
+        }
+        .modal-close-btn:hover {
+            color: var(--dark);
+        }
+        #form-result-msg {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
         .hero { text-align: center; padding: 40px 20px; }
         .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
 
@@ -183,8 +297,40 @@
         <div class="loading-text">Ready your workspace..</div>
     </div>
 
+    <!-- FEEDBACK POPUP MODAL -->
+    <div class="feedback-modal-overlay" id="feedbackModalOverlay">
+        <div class="feedback-modal">
+            <button class="modal-close-btn" id="closeModalBtn">&times;</button>
+            <h3>Send Us Feedback</h3>
+            <!-- Form points to Web3Forms to deliver submissions directly to your email without a backend -->
+            <form action="https://api.web3forms.com/submit" method="POST" id="feedbackForm">
+                <!-- Replace YOUR_ACCESS_KEY_HERE with your Web3Forms access key from web3forms.com -->
+                <input type="hidden" name="access_key" value="0bb2eca3-575c-439b-9b0c-935dcf351680">
+                
+                <div class="feedback-form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Your name">
+                </div>
+
+                <div class="feedback-form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Your email address">
+                </div>
+
+                <div class="feedback-form-group">
+                    <label for="message">Comment</label>
+                    <textarea id="message" name="message" required placeholder="Write your comment or feedback here..."></textarea>
+                </div>
+
+                <button type="submit" class="modal-submit-btn">Submit Feedback</button>
+                <div id="form-result-msg"></div>
+            </form>
+        </div>
+    </div>
+
     <div class="header">
         <a href="#" class="logo">PDF<span>-X</span></a>
+        <button class="feedback-btn" id="openFeedbackBtn">💬 Contact</button>
     </div>
 
    <!-- HERO SECTION WITH CENTERED TEXT AND FLOATING RIGHT AD -->
@@ -317,43 +463,73 @@
         &copy; 2026 UtiliPDF Suite. Built for Privacy & Speed.
     </div>
 
-    <!-- TIMED SLIDE AD CONTAINER BANNER FRAME (WITH AUTOMATIC KEY AND SIZE SWITCHING) -->
-    <!-- <div class="sticky-bottom-ad" id="timed-bottom-banner">
-        <script type="text/javascript">
-            var isMobile = window.innerWidth <= 768;
-            
-            atOptions = {
-                'key' : isMobile ? '2276729ed87fe959203dc3ea4e044ac7' : '926f67bddb483350a3e9f47849dc7d0e',
-                'format' : 'iframe',
-                'height' : isMobile ? 50 : 90,
-                'width' : isMobile ? 320 : 728,
-                'params' : {}
-            };
-        </script>
-        <script type="text/javascript" src="https://www.highperformanceformat.com/926f67bddb483350a3e9f47849dc7d0e/invoke.js"></script>
-    </div> -->
-
     <script>
+        // --- FEEDBACK MODAL INTERACTIONS ---
+        const openFeedbackBtn = document.getElementById('openFeedbackBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const feedbackModalOverlay = document.getElementById('feedbackModalOverlay');
+        const feedbackForm = document.getElementById('feedbackForm');
+        const formResultMsg = document.getElementById('form-result-msg');
+
+        openFeedbackBtn.addEventListener('click', () => {
+            feedbackModalOverlay.classList.add('active');
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            feedbackModalOverlay.classList.remove('active');
+            formResultMsg.innerText = '';
+            feedbackForm.reset();
+        });
+
+        feedbackModalOverlay.addEventListener('click', (e) => {
+            if (e.target === feedbackModalOverlay) {
+                feedbackModalOverlay.classList.remove('active');
+                formResultMsg.innerText = '';
+                feedbackForm.reset();
+            }
+        });
+
+        // AJAX Submission to deliver comments via email instantly without reloading page
+        feedbackForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(feedbackForm);
+            formResultMsg.style.color = '#555';
+            formResultMsg.innerText = "Sending feedback...";
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    formResultMsg.style.color = '#28a745';
+                    formResultMsg.innerText = "Thank you! Your feedback has been sent.";
+                    feedbackForm.reset();
+                    setTimeout(() => {
+                        feedbackModalOverlay.classList.remove('active');
+                        formResultMsg.innerText = '';
+                    }, 2000);
+                } else {
+                    formResultMsg.style.color = 'var(--red)';
+                    formResultMsg.innerText = json.message || "Something went wrong. Please try again.";
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                formResultMsg.style.color = 'var(--red)';
+                formResultMsg.innerText = "Network error. Please check your connection.";
+            });
+        });
+
         // --- RESTORED ORIGINAL SIMULATED COUNTER ---
-     function updateCounter() {
+       function updateCounter() {
             const countEl = document.getElementById('view-count');
             let count = parseInt(countEl.innerText.replace(/,/g, ''));
             count += Math.floor(Math.random() * 5);
             countEl.innerText = count.toLocaleString();
         }
         setInterval(updateCounter, 3000);
-
-        // STICKY BOTTOM AD SLIDE ROUTINE (15s SHOW / 10s HIDE)
-        var bottomAdContainer = document.getElementById('timed-bottom-banner');
-        
-        function runAdShowSequence() {
-            bottomAdContainer.classList.add('slide-up');
-            setTimeout(function() {
-                bottomAdContainer.classList.remove('slide-up');
-                setTimeout(runAdShowSequence, 10000);
-            }, 15000);
-        }
-        setTimeout(runAdShowSequence, 2000);
 
         // FAST 1-SECOND NAVIGATION LOADER ROUTINE WITH BACK BUTTON RESCUE
         var routingElements = document.querySelectorAll('.load-route');
@@ -374,7 +550,6 @@
 
         // ✅ THE INTEGRATED BACK-BUTTON FIX
         window.addEventListener('pageshow', function(event) {
-            // Disables and removes the loader if the browser serves page from Back/Forward caching memory
             if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
                 if (loaderOverlay) {
                     loaderOverlay.classList.remove('active');
@@ -385,3 +560,7 @@
 
 </body>
 </html>
+
+
+
+
